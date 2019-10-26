@@ -1,2 +1,1 @@
-# data-visualization-workshop
-Data Visualization with JavaScript
+# Data Visualization with JavaScript
