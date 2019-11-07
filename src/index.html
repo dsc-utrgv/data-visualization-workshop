@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DCS Data Visualization Workshop</title>
+	<link rel="stylesheet" href="dc.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+
+</head>
+<body>
+	<table class="table table-hover dc-data-table"></table>
+	<h1>DSC-UTRGV Data Visualization</h1>
+
+	<div class="charts">
+		<!-- Chart One: Vehicle Type -->
+		<div id="carType">
+			<h3>Car Type</h3>
+			<span class="reset" style="display: none;">Selected: <span class="filter"></span></span>
+			<div class="clearfix"></div>
+		</div>
+		
+		<!-- Chart Two: Gate Name -->
+		<div id="gateName">
+			<h3>Gate Name</h3>
+			<span class="reset" style="display: none;">Selected: <span class="filter"></span></span>
+			<div class="clearfix"></div>
+		</div>
+		
+		<!-- Data Count -->
+		<div>
+			<div class="dc-data-count">
+				<span class="filter-count"></span> selected out of <span class="total-count"></span> records | <a
+					href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a>
+			</div>
+		</div>
+	</div>
+
+	<script src="crossfilter.js"></script>
+	<script src="d3.js"></script>
+	<script src="dc.js"></script>
+
+	<script>
+		/* Initializing the size of chart windows */
+		var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) - 50
+		var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 200
+			
+		/* Declaring variable and assigning to our data source */
+		var url = "";
+
+		/* Creating chart objects */
+
+		/* d3 asynchronous call */
+		d3.csv(url, function (err, data) {
+			if (err) throw err;
+
+		/* Instantiating a new crossfilter with our data source */
+
+		/* Grouping all columns of our data */
+
+		/* Deciding what data we'd like to visualize by dimensions */
+
+		/* Grouping our data dimensions */
+
+		/* Setting chart one attributes */
+
+		/* Setting chart two attributes */
+
+
+		/* Rendering our charts */
+		dc.renderAll();
+
+		});
+	</script>
+</body>
+</html>
