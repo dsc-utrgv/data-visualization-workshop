@@ -45,29 +45,63 @@
 		var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 200
 			
 		/* Declaring variable and assigning to our data source */
-		var url = "";
+		var url = "Lekagul_slice.csv";
 
 		/* Creating chart objects */
+		var carTypeChart = dc.rowChart("#carType"),
+			gateNameChart = dc.rowChart("#gateName"),
+			visCount = dc.dataCount(".dc-data-count"),
+			visTable = dc.dataTable(".dc-data-table"); 
 
 		/* d3 asynchronous call */
 		d3.csv(url, function (err, data) {
 			if (err) throw err;
 
 		/* Instantiating a new crossfilter with our data source */
-
-		/* Grouping all columns of our data */
+		var ndx = crossfilter(data);
+   		var all = ndx.groupAll();
 
 		/* Deciding what data we'd like to visualize by dimensions */
+		var carTypeDim = ndx.dimension(function (d) { return d["car-type"]; });
+		var gateNameDim = ndx.dimension(function (d) { return d["gate-name"]; });
+		var dateDim = ndx.dimension(function (d) { return d.Timestamp; });
+
 
 		/* Grouping our data dimensions */
+		var carTypeGroup = carTypeDim.group();
+		var gateNameGroup = gateNameDim.group();
+		var dateGroup = dateDim.group();
 
 		/* Setting chart one attributes */
+		carTypeChart 
+			.height(h / 1.5)
+			.width(w / 2)
+			.dimension(carTypeDim)
+			.group(carTypeGroup)
+			.elasticX(true);
+
 
 		/* Setting chart two attributes */
+		gateNameChart 
+			.height(h / 1.5)
+			.width(w / 2)
+			.dimension(gateNameDim)
+			.group(gateNameGroup)
+			.elasticX(true)
+			.data(function (group) { return group.top(10); });
+
+		visCount
+			.dimension(ndx)
+			.group(all);
+
+		visTable
+			.dimension(dateDim);
 
 
 		/* Rendering our charts */
 		dc.renderAll();
+
+		/* python3 -m http.server */
 
 		});
 	</script>
